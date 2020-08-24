@@ -14,7 +14,7 @@ class ExampleTest extends TestCase
      */
     public function testGetFiveBooksWithUserName()
     {
-        $response = $this->json('get', '/', [
+        $response = $this->json('get', 'api', [
             'books' => [
                 'take' => 5,
                 'select' => 'title',
