@@ -8,7 +8,10 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
+		
+		<!-- Axios -->
+		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+		
         <!-- Styles -->
         <style>
             html, body {
@@ -80,21 +83,30 @@
             @endif
 
             <div class="content">
-                <div class="title m-b-md">
-                    Laravel
+                <div class="title m-b-md" id="title">
+                    ...
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <code id="results">
+					</code>
                 </div>
             </div>
         </div>
     </body>
+	<script>
+	axios.get('http://127.0.0.1:8000/api', {
+		params: {
+			books: {
+				take: 5,
+				select: 'title'
+			}
+		}
+    }).then(({ data: books }) => {
+    // Do something...
+		console.log(JSON.stringify(books))
+		document.getElementById("title").textContent = "API called successfully! :)"
+		document.getElementById("results").textContent = JSON.stringify(books)
+    });
+	</script>
 </html>
